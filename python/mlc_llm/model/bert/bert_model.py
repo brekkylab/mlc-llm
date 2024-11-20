@@ -192,7 +192,7 @@ class BertEmbeddings(nn.Module):
         self.position_embeddings = nn.Embedding(
             config.context_window_size, config.hidden_size, dtype="float32"
         )
-        self.token_type_embeddings = nn.Embedding(2, config.hidden_size, dtype="float32")
+        self.token_type_embeddings = nn.Embedding(1, config.hidden_size, dtype="float32")
         self.LayerNorm = nn.LayerNorm(config.hidden_size, eps=config.layer_norm_eps)
 
     def forward(self, input_ids: Tensor, token_type_ids: Tensor, position_ids: Tensor):
