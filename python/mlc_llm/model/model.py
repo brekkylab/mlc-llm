@@ -162,6 +162,19 @@ MODELS: Dict[str, Model] = {
             "group-quant": gemma3_quantization.group_quant,
         },
     ),
+    "gemma3_text": Model(
+        name="gemma3_text",
+        model=gemma3_model.Gemma3ForCausalLM,
+        config=gemma3_model.Gemma3Config,
+        source={
+            "huggingface-torch": gemma3_loader.huggingface,
+            "huggingface-safetensor": gemma3_loader.huggingface,
+        },
+        quantize={
+            "no-quant": gemma3_quantization.no_quant,
+            "group-quant": gemma3_quantization.group_quant,
+        },
+    ),
     "gpt2": Model(
         name="gpt2",
         model=gpt2_model.GPT2LMHeadModel,
@@ -329,6 +342,21 @@ MODELS: Dict[str, Model] = {
             "no-quant": deepseek_v2_quantization.no_quant,
             "group-quant": deepseek_v2_quantization.group_quant,
             "ft-quant": deepseek_v2_quantization.ft_quant,
+        },
+    ),
+    "deepseek_v3": Model(
+        name="deepseek_v3",
+        model=deepseek_v2_model.DeepseekV2ForCausalLM,
+        config=deepseek_v2_model.DeepseekV2Config,
+        source={
+            "huggingface-torch": deepseek_v2_loader.huggingface,
+            "huggingface-safetensor": deepseek_v2_loader.huggingface,
+        },
+        quantize={
+            "no-quant": deepseek_v2_quantization.no_quant,
+            "group-quant": deepseek_v2_quantization.group_quant,
+            "ft-quant": deepseek_v2_quantization.ft_quant,
+            "block-scale-quant": deepseek_v2_quantization.block_scale_quant,
         },
     ),
     "stablelm": Model(
