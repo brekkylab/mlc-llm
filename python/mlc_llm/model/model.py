@@ -46,6 +46,10 @@ from .rwkv6 import rwkv6_loader, rwkv6_model, rwkv6_quantization
 from .stable_lm import stablelm_loader, stablelm_model, stablelm_quantization
 from .starcoder2 import starcoder2_loader, starcoder2_model, starcoder2_quantization
 
+# Custom
+from .jina import jina_loader, jina_model, jina_quantization
+from .bge import bge_loader, bge_model, bge_quantization
+
 ModelConfig = Any
 """A ModelConfig is an object that represents a model architecture. It is required to have
 a class method `from_file` with the following signature:
@@ -654,6 +658,32 @@ MODELS: Dict[str, Model] = {
             "ft-quant": nemotron_quantization.ft_quant,
             "awq": nemotron_quantization.awq_quant,
             "per-tensor-quant": nemotron_quantization.per_tensor_quant,
+        },
+    ),
+    "jina": Model(
+        name="jina",
+        model=jina_model.JinaModel,
+        config=jina_model.JinaConfig,
+        source={
+            "huggingface-torch": jina_loader.huggingface,
+            "huggingface-safetensor": jina_loader.huggingface,
+        },
+        quantize={
+            "no-quant": jina_quantization.no_quant,
+        },
+    ),
+    "bge": Model(
+        name="bge",
+        model=bge_model.BGEModel,
+        config=bge_model.BGEConfig,
+        source={
+            "huggingface-torch": bge_loader.huggingface,
+            "huggingface-safetensor": bge_loader.huggingface,
+        },
+        quantize={
+            "group-quant": bge_quantization.group_quant,
+            "ft-quant": bge_quantization.ft_quant,
+            "no-quant": bge_quantization.no_quant,
         },
     ),
 }
